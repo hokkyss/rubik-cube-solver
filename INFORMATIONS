@@ -1,4 +1,4 @@
-COLOR NUMBERING
+SQUARE NUMBERING
 _  _  _  00 01 02  _  _  _  _  _  _
 _  _  _  03 04 05  _  _  _  _  _  _
 _  _  _  06 07 08  _  _  _  _  _  _
@@ -8,6 +8,21 @@ _  _  _  06 07 08  _  _  _  _  _  _
 _  _  _  45 46 47  _  _  _  _  _  _
 _  _  _  48 49 50  _  _  _  _  _  _
 _  _  _  51 52 53  _  _  _  _  _  _
+
+COLOR REPRESENTATIONS
+- RED: R
+- ORANGE: O
+- BLUE: B
+- GREEN: G
+- WHITE: W
+- YELLOW: Y
+
+INPUT FORMAT
+A one line string. Each character is one of color representations.
+The i-th character is the color for i-th square.
+
+INPUT EXAMPLE
+RRRRRRRRRYYYYYYYYYGGGGGGGGGWWWWWWWWWBBBBBBBBBOOOOOOOOO
 
 SURFACE NUMBERING
 _ 0 _ _
@@ -105,4 +120,4 @@ D:
   - 39       --> 37
 
 REFERENCES
-- https://github.com/ldez/cubejs
+- https://github.com/ldez/cubejs (THE FACES: 0 3 2 5 1 4)
