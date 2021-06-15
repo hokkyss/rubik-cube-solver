@@ -1,6 +1,6 @@
 .face {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

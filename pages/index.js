@@ -31,6 +31,9 @@ function Home() {
           <Link
             href={{
               pathname: "/result",
+              query: {
+                cube: "GWWGWBYYBRRBOOOOOORRWGGWGGORRGRROBBORGYWBBWBBYYWYYWYYG",
+              },
             }}
           >
             HEYYY

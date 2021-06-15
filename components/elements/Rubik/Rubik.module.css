@@ -23,8 +23,11 @@
 }
 
 .cube {
-  width: 720px;
-  height: 540px;
+  /* width = 4 * face width
+   * height = 3 * face height 
+   */
+  width: 600px;
+  height: 450px;
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;

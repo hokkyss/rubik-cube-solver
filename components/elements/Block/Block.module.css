@@ -23,9 +23,12 @@
 }
 
 #block {
-  /* (60 - border) / 2 = margin */
-  width: 55px;
-  height: 55px;
-  margin: 2px;
+  /* width + 2 * margin + border = face width
+   * height + 2 * margin + border = face height
+   */
+  width: 48px;
+  height: 48px;
+  margin: 0.5px;
   border: 1px black solid;
+  border-radius: 4px;
 }
