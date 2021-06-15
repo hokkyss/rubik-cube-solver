@@ -1,0 +1,31 @@
+.W {
+  background-color: #ffffff;
+}
+
+.Y {
+  background-color: #f2f215;
+}
+
+.O {
+  background-color: #ffaf1c;
+}
+
+.R {
+  background-color: #ed3030;
+}
+
+.G {
+  background-color: #58d568;
+}
+
+.B {
+  background-color: #1c5ffe;
+}
+
+.cube {
+  width: 720px;
+  height: 540px;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+}

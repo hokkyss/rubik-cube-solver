@@ -1,0 +1,17 @@
+.face {
+  width: 180px;
+  height: 180px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#black {
+  border: 1px black solid;
+  border-radius: 5px;
+  background-color: black;
+}
+
+#white {
+  background-color: white;
+}
