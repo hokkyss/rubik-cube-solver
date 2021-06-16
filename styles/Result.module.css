@@ -1,0 +1,34 @@
+.container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.rubikContainer {
+  width: 600px;
+  height: 450px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 600px;
+}
+
+.steps {
+  width: 30px;
+  margin: 2%;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px;
+  background-color: grey;
+  color: black;
+  font-weight: bold;
+}
+
+.steps:hover {
+  background-color: black;
+  color: white;
+}

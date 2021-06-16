@@ -1,11 +1,11 @@
 import styles from "./Face.module.css";
-import Block from "../Block/Block";
+import Block from "../Block/block";
 
-export default function Face({ blocks, useless }) {
+export default function Face({ blocks, useless, no }) {
   return (
     <div id={useless ? styles.white : styles.black} className={styles.face}>
-      {blocks.map((block) => (
-        <Block block={block} />
+      {blocks.map((value, index) => (
+        <Block block={value} key={`${no}${index}`} />
       ))}
     </div>
   );

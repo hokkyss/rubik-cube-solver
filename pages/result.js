@@ -3,7 +3,9 @@ import { withRouter } from "next/router";
 import Head from "next/head";
 
 import * as Moves from "../constants/moves";
-import Rubik from "../components/elements/Rubik/Rubik";
+import Rubik from "../components/elements/Rubik/rubik";
+
+import styles from "../styles/Result.module.css";
 
 function Result({ router }) {
   const [cube, setCube] = useState(
@@ -11,6 +13,10 @@ function Result({ router }) {
       ? router.query.cube
       : "YYYYYYYYYOOOOOOOOOGGGGGGGGGRRRRRRRRRBBBBBBBBBWWWWWWWWW"
   );
+  const [moves, setMoves] = useState([""]);
+  const [conditions, setConditions] = useState([cube]);
+  const [chosenCondition, setChosenCondition] = useState(0);
+  const [shown, setShown] = useState(cube);
 
   const a = "WWRWWROORGGYOOYOOWGGGGGWBBWYYYRRBRRBBOOWBBWBBRRGYYGYYO"; // R2 U F R
   const b = "YBBWWROORRGYWOYWOWGGGGGWBBWYYORRYRRYWWBBBOBBORRGYYGGOO"; // R2 U F R B
@@ -19,23 +25,49 @@ function Result({ router }) {
   const e = "YYWWWWWWWROOROOGBBGGGBGGRGGRRBRRORRBOBBGBBOOOWYYWYYYYY"; // U' L2 U B2
   const f = "BYGYWGOWGROWROWYRYBGYBGYBBGRRRRRYOOBWBWGBWYGGOOWBYWOOR"; // R B L2 D2 B
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setCube(f);
+  }, []);
 
   useEffect(() => {
-    const awal = Date.now();
-    console.log(Moves.solve(f));
-    const akhir = Date.now();
-
-    console.log(akhir - awal);
+    const solution = Moves.solve(cube);
+    setMoves(solution.moves);
+    setConditions(solution.conditions);
   }, [cube]);
 
+  useEffect(() => {}, [moves]);
+
+  useEffect(() => {
+    setShown(conditions[chosenCondition]);
+  }, [conditions, chosenCondition]);
+
+  const changeChosenCondition = (idx) => {
+    setChosenCondition(idx);
+  };
+
   return (
-    <>
+    <div className={styles.container}>
       <Head>
         <title>Solve rubik's cube!</title>
       </Head>
-      <Rubik cube={cube} />
-    </>
+
+      <div className={styles.rubikContainer}>
+        <Rubik cube={shown} />
+      </div>
+      <div className={styles.buttons}>
+        {moves.map((value, index) => (
+          <div
+            id={styles.pressable}
+            className={styles.steps}
+            key={index}
+            title={index === 0 ? "initial" : `step ${index}`}
+            onClick={() => setChosenCondition(index)}
+          >
+            {value}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 

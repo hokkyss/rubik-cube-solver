@@ -226,186 +226,214 @@ function countDistanceToSolve(cube) {
 
 function solve(cube) {
   // use A* algorithm
-  // catat last move, consecutive last move, condition, moves
-  // meeting 25 times sama distance to solve
+  // catat last move, conditions, moves
   let queue = [];
   const comparator = (a, b) =>
-    a.distanceToEnd +
-    a.moves.split(" ").length -
-    (b.distanceToEnd + b.moves.split(" ").length);
+    a.distanceToEnd + a.moves.length - (b.distanceToEnd + b.moves.length);
 
   queue.push({
     lastMove: "",
-    consecutive: 0,
     condition: cube,
-    moves: "",
+    conditions: [cube],
+    moves: ["»"],
     distanceToEnd: countDistanceToSolve(cube),
   });
 
   while (queue.length > 0) {
-    const { lastMove, consecutive, condition, moves, distanceToEnd } =
+    const { lastMove, condition, conditions, moves, distanceToEnd } =
       queue.shift();
-    if (moves.split(" ").length > 7) continue;
+    if (moves.length > 6) continue;
 
     if (countDistanceToSolve(condition) === 0) {
-      return { moves };
+      return { conditions, moves };
     }
 
-    console.log(moves);
+    console.log("AAA");
+
+    // console.log(moves, distanceToEnd + moves.split(" ").length);
 
     // next move
     {
-      if (
-        lastMove !== "B'" &&
-        (lastMove !== "B" || (lastMove === "B" && consecutive < 2))
-      ) {
-        const afterB = B(condition);
+      // B, B2, and B'
+      if (lastMove !== "B'" && lastMove !== "B" && lastMove !== "B2") {
+        const afterB = B(conditions[conditions.length - 1]);
         queue.push({
           lastMove: "B",
-          consecutive: lastMove === "B" ? 2 : 1,
           condition: afterB,
-          moves: lastMove === "" ? "B" : moves + " B",
+          conditions: conditions.concat(afterB),
+          moves: moves.concat("B"),
           distanceToEnd: countDistanceToSolve(afterB),
         });
-      }
 
-      if (
-        lastMove !== "F'" &&
-        (lastMove !== "F" || (lastMove === "F" && consecutive < 2))
-      ) {
-        const afterF = F(condition);
+        const afterB2 = B(afterB);
         queue.push({
-          lastMove: "F",
-          consecutive: lastMove === "F" ? 2 : 1,
-          condition: afterF,
-          moves: lastMove === "" ? "F" : moves + " F",
-          distanceToEnd: countDistanceToSolve(afterF),
+          lastMove: "B2",
+          condition: afterB2,
+          conditions: conditions.concat(afterB2),
+          moves: moves.concat("B2"),
+          distanceToEnd: countDistanceToSolve(afterB2),
         });
-      }
 
-      if (
-        lastMove !== "L'" &&
-        (lastMove !== "L" || (lastMove === "L" && consecutive < 2))
-      ) {
-        const afterL = L(condition);
-        queue.push({
-          lastMove: "L",
-          consecutive: lastMove === "L" ? 2 : 1,
-          condition: afterL,
-          moves: lastMove === "" ? "L" : moves + " L",
-          distanceToEnd: countDistanceToSolve(afterL),
-        });
-      }
-
-      if (
-        lastMove !== "R'" &&
-        (lastMove !== "R" || (lastMove === "R" && consecutive < 2))
-      ) {
-        const afterR = R(condition);
-        queue.push({
-          lastMove: "R",
-          consecutive: lastMove === "R" ? 2 : 1,
-          condition: afterR,
-          moves: lastMove === "" ? "R" : moves + " R",
-          distanceToEnd: countDistanceToSolve(afterR),
-        });
-      }
-
-      if (
-        lastMove !== "U'" &&
-        (lastMove !== "U" || (lastMove === "U" && consecutive < 2))
-      ) {
-        const afterU = U(condition);
-        queue.push({
-          lastMove: "U",
-          consecutive: lastMove === "U" ? 2 : 1,
-          condition: afterU,
-          moves: lastMove === "" ? "U" : moves + " U",
-          distanceToEnd: countDistanceToSolve(afterU),
-        });
-      }
-
-      if (
-        lastMove !== "D'" &&
-        (lastMove !== "D" || (lastMove === "D" && consecutive < 2))
-      ) {
-        const afterD = D(condition);
-        queue.push({
-          lastMove: "D",
-          consecutive: lastMove === "D" ? 2 : 1,
-          condition: afterD,
-          moves: lastMove === "" ? "D" : moves + " D",
-          distanceToEnd: countDistanceToSolve(afterD),
-        });
-      }
-
-      if (lastMove !== "B" && lastMove !== "B'") {
-        const afterB_ = B_(condition);
+        const afterB_ = B(afterB2);
         queue.push({
           lastMove: "B'",
-          consecutive: 1,
           condition: afterB_,
-          moves: lastMove === "" ? "B'" : moves + " B'",
+          conditions: conditions.concat(afterB_),
+          moves: moves.concat("B_"),
           distanceToEnd: countDistanceToSolve(afterB_),
         });
       }
 
-      if (lastMove !== "F" && lastMove !== "F'") {
-        const afterF_ = F_(condition);
+      // F, F2, and F'
+      if (lastMove !== "F'" && lastMove !== "F" && lastMove !== "F2") {
+        const afterF = F(conditions[conditions.length - 1]);
+        queue.push({
+          lastMove: "F",
+          condition: afterF,
+          conditions: conditions.concat(afterF),
+          moves: moves.concat("F"),
+          distanceToEnd: countDistanceToSolve(afterF),
+        });
+
+        const afterF2 = F(afterF);
+        queue.push({
+          lastMove: "F2",
+          condition: afterF2,
+          conditions: conditions.concat(afterF2),
+          moves: moves.concat("F2"),
+          distanceToEnd: countDistanceToSolve(afterF2),
+        });
+
+        const afterF_ = F(afterF2);
         queue.push({
           lastMove: "F'",
-          consecutive: 1,
           condition: afterF_,
-          moves: lastMove === "" ? "F'" : moves + " F'",
+          conditions: conditions.concat(afterF_),
+          moves: moves.concat("F'"),
           distanceToEnd: countDistanceToSolve(afterF_),
         });
       }
 
-      if (lastMove !== "L" && lastMove !== "L'") {
-        const afterL_ = L_(condition);
+      // L, L2, and L'
+      if (lastMove !== "L'" && lastMove !== "L" && lastMove !== "L2") {
+        const afterL = L(conditions[conditions.length - 1]);
+        queue.push({
+          lastMove: "L",
+          condition: afterL,
+          conditions: conditions.concat(afterL),
+          moves: moves.concat("L"),
+          distanceToEnd: countDistanceToSolve(afterL),
+        });
+
+        const afterL2 = L(afterL);
+        queue.push({
+          lastMove: "L2",
+          condition: afterL2,
+          conditions: conditions.concat(afterL2),
+          moves: moves.concat("L2"),
+          distanceToEnd: countDistanceToSolve(afterL2),
+        });
+
+        const afterL_ = L(afterL2);
         queue.push({
           lastMove: "L'",
-          consecutive: 1,
           condition: afterL_,
-          moves: lastMove === "" ? "L'" : moves + " L'",
+          conditions: conditions.concat(afterL_),
+          moves: moves.concat("L'"),
           distanceToEnd: countDistanceToSolve(afterL_),
         });
       }
 
-      if (lastMove !== "R" && lastMove !== "R'") {
-        const afterR_ = R_(condition);
+      // R, R2, and R'
+      if (lastMove !== "R'" && lastMove !== "R" && lastMove !== "R2") {
+        const afterR = R(conditions[conditions.length - 1]);
+        queue.push({
+          lastMove: "R",
+          condition: afterR,
+          conditions: conditions.concat(afterR),
+          moves: moves.concat("R"),
+          distanceToEnd: countDistanceToSolve(afterR),
+        });
+
+        const afterR2 = R(afterR);
+        queue.push({
+          lastMove: "R2",
+          condition: afterR2,
+          conditions: conditions.concat(afterR2),
+          moves: moves.concat("R2"),
+          distanceToEnd: countDistanceToSolve(afterR2),
+        });
+
+        const afterR_ = R(afterR2);
         queue.push({
           lastMove: "R'",
-          consecutive: 1,
           condition: afterR_,
-          moves: lastMove === "" ? "R'" : moves + " R'",
+          conditions: conditions.concat(afterR_),
+          moves: moves.concat("R'"),
           distanceToEnd: countDistanceToSolve(afterR_),
         });
       }
 
-      if (lastMove !== "U" && lastMove !== "U'") {
-        const afterU_ = U_(condition);
+      // U, U2, and U'
+      if (lastMove !== "U'" && lastMove !== "U" && lastMove !== "U2") {
+        const afterU = U(conditions[conditions.length - 1]);
+        queue.push({
+          lastMove: "U",
+          condition: afterU,
+          conditions: conditions.concat(afterU),
+          moves: moves.concat("U"),
+          distanceToEnd: countDistanceToSolve(afterU),
+        });
+
+        const afterU2 = U(afterU);
+        queue.push({
+          lastMove: "U2",
+          condition: afterU2,
+          conditions: conditions.concat(afterU2),
+          moves: moves.concat("U2"),
+          distanceToEnd: countDistanceToSolve(afterU2),
+        });
+
+        const afterU_ = U(afterU2);
         queue.push({
           lastMove: "U'",
-          consecutive: 1,
           condition: afterU_,
-          moves: lastMove === "" ? "U'" : moves + " U'",
+          conditions: conditions.concat(afterU_),
+          moves: moves.concat("U'"),
           distanceToEnd: countDistanceToSolve(afterU_),
         });
       }
 
-      if (lastMove !== "D" && lastMove !== "D'") {
-        const afterD_ = D_(condition);
+      // D, D2, and D'
+      if (lastMove !== "D'" && lastMove !== "D" && lastMove !== "d2") {
+        const afterD = D(conditions[conditions.length - 1]);
+        queue.push({
+          lastMove: "D",
+          condition: afterD,
+          conditions: conditions.concat(afterD),
+          moves: moves.concat("D"),
+          distanceToEnd: countDistanceToSolve(afterD),
+        });
+
+        const afterD2 = D(afterD);
+        queue.push({
+          lastMove: "D2",
+          condition: afterD2,
+          conditions: conditions.concat(afterD2),
+          moves: moves.concat("D2"),
+          distanceToEnd: countDistanceToSolve(afterD2),
+        });
+
+        const afterD_ = D(afterD2);
         queue.push({
           lastMove: "D'",
-          consecutive: 1,
           condition: afterD_,
-          moves: lastMove === "" ? "D'" : moves + " D'",
+          conditions: conditions.concat(afterD_),
+          moves: moves.concat("D'"),
           distanceToEnd: countDistanceToSolve(afterD_),
         });
       }
     }
-
     queue.sort(comparator);
   }
 }
