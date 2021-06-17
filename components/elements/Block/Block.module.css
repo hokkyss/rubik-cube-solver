@@ -22,6 +22,10 @@
   background-color: #1c5ffe;
 }
 
+.grey {
+  background-color: #cccccc;
+}
+
 #block {
   /* width + 2 * margin + border = face width
    * height + 2 * margin + border = face height

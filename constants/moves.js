@@ -240,15 +240,11 @@ function solve(cube) {
   });
 
   while (queue.length > 0) {
-    const { lastMove, condition, conditions, moves, distanceToEnd } =
-      queue.shift();
-    if (moves.length > 6) continue;
+    const { lastMove, condition, conditions, moves } = queue.shift();
 
     if (countDistanceToSolve(condition) === 0) {
       return { conditions, moves };
     }
-
-    console.log("AAA");
 
     // console.log(moves, distanceToEnd + moves.split(" ").length);
 
@@ -256,7 +252,7 @@ function solve(cube) {
     {
       // B, B2, and B'
       if (lastMove !== "B'" && lastMove !== "B" && lastMove !== "B2") {
-        const afterB = B(conditions[conditions.length - 1]);
+        const afterB = B(condition);
         queue.push({
           lastMove: "B",
           condition: afterB,
@@ -279,14 +275,14 @@ function solve(cube) {
           lastMove: "B'",
           condition: afterB_,
           conditions: conditions.concat(afterB_),
-          moves: moves.concat("B_"),
+          moves: moves.concat("B'"),
           distanceToEnd: countDistanceToSolve(afterB_),
         });
       }
 
       // F, F2, and F'
       if (lastMove !== "F'" && lastMove !== "F" && lastMove !== "F2") {
-        const afterF = F(conditions[conditions.length - 1]);
+        const afterF = F(condition);
         queue.push({
           lastMove: "F",
           condition: afterF,
@@ -316,7 +312,7 @@ function solve(cube) {
 
       // L, L2, and L'
       if (lastMove !== "L'" && lastMove !== "L" && lastMove !== "L2") {
-        const afterL = L(conditions[conditions.length - 1]);
+        const afterL = L(condition);
         queue.push({
           lastMove: "L",
           condition: afterL,
@@ -346,7 +342,7 @@ function solve(cube) {
 
       // R, R2, and R'
       if (lastMove !== "R'" && lastMove !== "R" && lastMove !== "R2") {
-        const afterR = R(conditions[conditions.length - 1]);
+        const afterR = R(condition);
         queue.push({
           lastMove: "R",
           condition: afterR,
@@ -376,7 +372,7 @@ function solve(cube) {
 
       // U, U2, and U'
       if (lastMove !== "U'" && lastMove !== "U" && lastMove !== "U2") {
-        const afterU = U(conditions[conditions.length - 1]);
+        const afterU = U(condition);
         queue.push({
           lastMove: "U",
           condition: afterU,
@@ -406,7 +402,7 @@ function solve(cube) {
 
       // D, D2, and D'
       if (lastMove !== "D'" && lastMove !== "D" && lastMove !== "d2") {
-        const afterD = D(conditions[conditions.length - 1]);
+        const afterD = D(condition);
         queue.push({
           lastMove: "D",
           condition: afterD,

@@ -1,6 +1,6 @@
 import styles from "./Block.module.css";
 
-export default function Block({ block }) {
+export function Block({ block }) {
   return (
     <div
       id={styles.block}
@@ -15,7 +15,9 @@ export default function Block({ block }) {
           ? styles.O
           : block === "G"
           ? styles.G
-          : styles.B
+          : block === "B"
+          ? styles.B
+          : styles.grey
       }
     ></div>
   );

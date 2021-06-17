@@ -1,13 +1,7 @@
-.container {
+#container {
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.rubikContainer {
-  width: 600px;
-  height: 450px;
 }
 
 .buttons {
@@ -28,7 +22,8 @@
   font-weight: bold;
 }
 
-.steps:hover {
+.steps:hover,
+#pressed {
   background-color: black;
   color: white;
 }
