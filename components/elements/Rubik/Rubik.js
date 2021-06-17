@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styles from "./Rubik.module.css";
 
 import { Face } from "../";

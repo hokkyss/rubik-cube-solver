@@ -4,7 +4,55 @@
   align-items: center;
 }
 
+.fileContent {
+  max-width: 580px;
+  font-size: 15px;
+  margin: 0 0 3% 0;
+}
+
+.upperInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: 300px;
+}
+
+.lowerInput {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: 150px;
+  background-color: grey;
+}
+
 .input {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 600px;
+  height: 450px;
+  border: 1px black solid;
+  margin: 0 2% 0 0;
+}
+
+.solveButton {
+  background-color: #cccccc;
+  color: black;
+  font-weight: bold;
+  border: 1px black solid;
+  border-radius: 5px;
+  margin: 1% 1% 1% 1%;
+  padding: 1% 2% 1% 2%;
+  cursor: pointer;
+}
+
+.solveButton:hover {
+  background-color: black;
+  color: white;
 }

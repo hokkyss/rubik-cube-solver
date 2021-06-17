@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,21 +8,20 @@ import styles from "../styles/Home.module.css";
 import { Rubik } from "../components/elements";
 
 function Home() {
+  const router = useRouter();
   const [cube, setCube] = useState(
     "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
   );
+  const [content, setContent] = useState("");
 
   useEffect(() => {}, []);
 
   const handleFileInput = (e) => {
-    console.log(e);
-
     const reader = new FileReader();
     reader.onload = (e) => {
-      console.log(e.target.result);
       setCube(e.target.result);
+      setContent(e.target.result);
     };
-
     reader.readAsText(e.target.files[0]);
   };
 
@@ -34,8 +34,23 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.input}>
-        <Link href={`${cube}`}>HEYYY</Link>
-        <input type="file" id="file" onChange={handleFileInput} accept=".txt" />
+        <div className={styles.upperInput}>
+          <h1>See your rubik on the right!</h1>
+          <div className={styles.fileContent}>
+            {content === "" ? "Insert your file!" : content}
+          </div>
+          <input
+            type="file"
+            id="file"
+            onChange={handleFileInput}
+            accept=".txt"
+          />
+        </div>
+        <div className={styles.lowerInput}>
+          <div className={styles.solveButton}>
+            <Link href={`/${cube}`}>SOLVE</Link>
+          </div>
+        </div>
       </div>
 
       <Rubik cube={cube} />

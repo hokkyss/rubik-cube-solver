@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 import * as Moves from "../constants/moves";
 import { Rubik } from "../components/elements";
@@ -53,12 +54,15 @@ function Result({ cube }) {
             id={index === chosenCondition ? styles.pressed : styles.normal}
             className={styles.steps}
             key={index}
-            title={index === 0 ? "initial" : `step ${index}`}
+            title={index === 0 ? "Initial" : `Step ${index}`}
             onClick={() => changeChosenCondition(index)}
           >
             {value}
           </div>
         ))}
+        <div className={styles.steps} title="Back to home page">
+          <Link href="/">&larr;</Link>
+        </div>
       </div>
     </div>
   );
@@ -66,7 +70,6 @@ function Result({ cube }) {
 
 export async function getServerSideProps(context) {
   const { params } = context;
-  console.log(context);
 
   return {
     props: { cube: params.cube }, // will be passed to the page component as props
