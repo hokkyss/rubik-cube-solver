@@ -116,6 +116,7 @@ The number 13 comes from the average number of moves possible, being
 
 - [Design and Interactions](https://rubiks-cube-solver.com/)
 - [Theoretical understandings](https://medium.com/@benjamin.botto/implementing-an-optimal-rubiks-cube-solver-using-korf-s-algorithm-bf750b332cf9)
+- [Lecture](https://informatika.stei.itb.ac.id/~rinaldi.munir/Stmik/stmik.htm)
 
 ### Framework
 
