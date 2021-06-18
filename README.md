@@ -1,34 +1,122 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rubik's Cube Solver by hokkyss
 
-## Getting Started
+## REQUIREMENTS
 
-First, run the development server:
+- [Nodejs](https://nodejs.org/en/download/) at least 12.19.0
 
-```bash
-npm run dev
-# or
-yarn dev
+## FIRST SETUP ONLY
+
+```install dependencies
+./setup
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## AFTER FIRST SETUP
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+./run
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## IMPORTANT INFORMATIONS
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Square Numbering
 
-## Learn More
+```
+_  _  _  00 01 02  _  _  _  _  _  _
+_  _  _  03 04 05  _  _  _  _  _  _
+_  _  _  06 07 08  _  _  _  _  _  _
+09 10 11 18 19 20 27 28 29 36 37 38
+12 13 14 21 22 23 30 31 32 39 40 41
+15 16 17 24 25 26 33 34 35 42 43 44
+_  _  _  45 46 47  _  _  _  _  _  _
+_  _  _  48 49 50  _  _  _  _  _  _
+_  _  _  51 52 53  _  _  _  _  _  _
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Face Positions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+_ U _ _
+L F R B
+_ D _ _
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Face Representations
 
-## Deploy on Vercel
+```
+U = Up
+D = Down
+L = Left
+R = Right
+F = Front
+B = Back
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Color Representations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+RED: R
+ORANGE: O
+BLUE: B
+GREEN: G
+WHITE: W
+YELLOW: Y
+```
+
+[Refer to this document.](./INFORMATIONS)
+
+## INPUT FORMAT
+
+```
+A one line string. Each character is one of color representations.
+The i-th character is the color for i-th square.
+```
+
+## INPUT EXAMPLE
+
+```
+RRRRRRRRRYYYYYYYYYGGGGGGGGGWWWWWWWWWBBBBBBBBBOOOOOOOOO
+```
+
+Translates to
+![this](./img/example.jpg)
+
+## ALGORITHM
+
+This rubik solver uses A\* algorithm.
+
+The number of configurations that can be generated is enormous. Because of that, using bruteforce is not a good idea. There is a big characteristic that leads to using A\*, that is the already known goal state.
+
+A\* is an optimized version of Breadth First Search (BFS). The nodes processed are the nodes with the most little total costs. In this case, the total cost is
+
+```
+number of moves already used + number of unarranged blocks
+```
+
+with the limitations being case dependent and takes much time.
+
+The time complexity of this algorithm is
+
+```
+O(13^m)
+```
+
+with m the number of moves done.
+The number 13 comes from the average number of moves possible, being
+
+- 15 moves possible after F, F', or F2
+- 12 moves possible after B, B', or B2
+- 15 moves possible after R, R', or R2
+- 12 moves possible after L, L', or L2
+- 15 moves possible after U, U', or U2
+- 12 moves possible after D, D', or D2
+
+## REFERENCES AND FRAMEWORKS
+
+### References
+
+- [Design and Interactions](https://rubiks-cube-solver.com/)
+- [Theoretical understandings](https://medium.com/@benjamin.botto/implementing-an-optimal-rubiks-cube-solver-using-korf-s-algorithm-bf750b332cf9)
+
+### Framework
+
+> This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

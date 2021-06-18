@@ -29,12 +29,19 @@ _ 0 _ _
 1 2 3 4
 _ 5 _ _
 
-SURFACE REPRESENTATION
+FACE REPRESENTATION
 _ U _ _
 L F R B
 _ D _ _
 
-MOVEMENTS AND CHANGES (--> REPRESENTS GOES TO)
+* U = Up
+* D = Down
+* L = Left
+* R = Right
+* F = Front
+* B = Back
+
+MOVEMENTS AND CHANGES (--> MEANS "GOES TO")
 F:
   - 06 07 08 --> 27 30 33
   - 27 30 33 --> 47 46 45
@@ -118,6 +125,3 @@ D:
   - 41       --> 43
   - 43       --> 39
   - 39       --> 37
-
-REFERENCES
-- https://github.com/ldez/cubejs (THE FACES: 0 3 2 5 1 4)
