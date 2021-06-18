@@ -77,7 +77,7 @@ The i-th character is the color for i-th square.
 RRRRRRRRRYYYYYYYYYGGGGGGGGGWWWWWWWWWBBBBBBBBBOOOOOOOOO
 ```
 
-Translates to
+Translates to \
 ![this](./img/example.jpg)
 
 ## ALGORITHM
