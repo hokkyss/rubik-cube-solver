@@ -226,19 +226,19 @@ function countDistanceToSolve(cube) {
 
 function solve(cube) {
   // use A* algorithm
-  // catat last move, conditions, moves
-  let queue = [];
+  const queue = [];
   const comparator = (a, b) =>
     a.distanceToEnd + a.moves.length - (b.distanceToEnd + b.moves.length);
 
-  queue.push({
+  const init = {
     lastMove: "",
     condition: cube,
     conditions: [cube],
     moves: ["»"],
     distanceToEnd: countDistanceToSolve(cube),
-  });
+  };
 
+  queue.push(init);
   while (queue.length > 0) {
     const { lastMove, condition, conditions, moves, distanceToEnd } =
       queue.shift();
@@ -247,14 +247,14 @@ function solve(cube) {
       return { conditions, moves };
     }
 
-    console.log(moves.join(" "), moves.length + distanceToEnd);
-
-    // console.log(moves, distanceToEnd + moves.split(" ").length);
+    if (moves.length > 25) continue;
+    console.log("A");
+    // console.log(moves.join(" "), moves.length + distanceToEnd);
 
     // next move
     {
       // F, F2, and F'
-      if (lastMove !== "F'" && lastMove !== "F" && lastMove !== "F2") {
+      if (lastMove[0] !== "F" && lastMove[0] !== "B") {
         const afterF = F(condition);
         queue.push({
           lastMove: "F",
@@ -284,7 +284,7 @@ function solve(cube) {
       }
 
       // B, B2, and B'
-      if (lastMove !== "B'" && lastMove !== "B" && lastMove !== "B2") {
+      if (lastMove[0] !== "B") {
         const afterB = B(condition);
         queue.push({
           lastMove: "B",
@@ -313,38 +313,8 @@ function solve(cube) {
         });
       }
 
-      // L, L2, and L'
-      if (lastMove !== "L'" && lastMove !== "L" && lastMove !== "L2") {
-        const afterL = L(condition);
-        queue.push({
-          lastMove: "L",
-          condition: afterL,
-          conditions: conditions.concat(afterL),
-          moves: moves.concat("L"),
-          distanceToEnd: countDistanceToSolve(afterL),
-        });
-
-        const afterL2 = L(afterL);
-        queue.push({
-          lastMove: "L2",
-          condition: afterL2,
-          conditions: conditions.concat(afterL2),
-          moves: moves.concat("L2"),
-          distanceToEnd: countDistanceToSolve(afterL2),
-        });
-
-        const afterL_ = L(afterL2);
-        queue.push({
-          lastMove: "L'",
-          condition: afterL_,
-          conditions: conditions.concat(afterL_),
-          moves: moves.concat("L'"),
-          distanceToEnd: countDistanceToSolve(afterL_),
-        });
-      }
-
       // R, R2, and R'
-      if (lastMove !== "R'" && lastMove !== "R" && lastMove !== "R2") {
+      if (lastMove[0] !== "R" && lastMove[0] !== "L") {
         const afterR = R(condition);
         queue.push({
           lastMove: "R",
@@ -373,8 +343,38 @@ function solve(cube) {
         });
       }
 
+      // L, L2, and L'
+      if (lastMove[0] !== "L") {
+        const afterL = L(condition);
+        queue.push({
+          lastMove: "L",
+          condition: afterL,
+          conditions: conditions.concat(afterL),
+          moves: moves.concat("L"),
+          distanceToEnd: countDistanceToSolve(afterL),
+        });
+
+        const afterL2 = L(afterL);
+        queue.push({
+          lastMove: "L2",
+          condition: afterL2,
+          conditions: conditions.concat(afterL2),
+          moves: moves.concat("L2"),
+          distanceToEnd: countDistanceToSolve(afterL2),
+        });
+
+        const afterL_ = L(afterL2);
+        queue.push({
+          lastMove: "L'",
+          condition: afterL_,
+          conditions: conditions.concat(afterL_),
+          moves: moves.concat("L'"),
+          distanceToEnd: countDistanceToSolve(afterL_),
+        });
+      }
+
       // U, U2, and U'
-      if (lastMove !== "U'" && lastMove !== "U" && lastMove !== "U2") {
+      if (lastMove[0] !== "U" && lastMove[0] !== "D") {
         const afterU = U(condition);
         queue.push({
           lastMove: "U",
@@ -404,7 +404,7 @@ function solve(cube) {
       }
 
       // D, D2, and D'
-      if (lastMove !== "D'" && lastMove !== "D" && lastMove !== "d2") {
+      if (lastMove[0] !== "D") {
         const afterD = D(condition);
         queue.push({
           lastMove: "D",
@@ -437,19 +437,4 @@ function solve(cube) {
   }
 }
 
-export {
-  L,
-  L_,
-  R,
-  R_,
-  F,
-  F_,
-  B,
-  B_,
-  U,
-  U_,
-  D,
-  D_,
-  countDistanceToSolve,
-  solve,
-};
+export { L, L_, R, R_, F, F_, B, B_, U, U_, D, D_, solve };

@@ -30,6 +30,23 @@
   background-color: grey;
 }
 
+.leftLowerInput {
+  width: 100px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightLowerInput {
+  width: 500px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .input {
   display: flex;
   flex-direction: column;
@@ -41,8 +58,13 @@
   margin: 0 2% 0 0;
 }
 
-.solveButton {
+.buttons {
   background-color: #cccccc;
+  width: 70px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: black;
   font-weight: bold;
   border: 1px black solid;
@@ -52,7 +74,7 @@
   cursor: pointer;
 }
 
-.solveButton:hover {
+.buttons:hover {
   background-color: black;
   color: white;
 }

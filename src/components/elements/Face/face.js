@@ -1,6 +1,6 @@
 import styles from "./Face.module.css";
 
-import { Block } from "../";
+import { Block } from "..";
 
 export function Face({ blocks, useless, no }) {
   return (

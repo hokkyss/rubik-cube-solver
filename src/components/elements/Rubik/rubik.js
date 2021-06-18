@@ -1,6 +1,6 @@
 import styles from "./Rubik.module.css";
 
-import { Face } from "../";
+import { Face } from "..";
 
 export function Rubik({ cube }) {
   return (
